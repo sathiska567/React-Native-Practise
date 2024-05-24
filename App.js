@@ -1,55 +1,27 @@
-import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import Header from './components/header'
-import ToDoItem from './components/todoitem'
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import LoginPage from './pages/LoginPage';
+import splashScreenPage from './pages/splashScreenPage';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
+const Drower = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
-  const [todos, setTodos] = useState([
-
-    { key: 1, title: 'Buy coffee' },
-    { key: 2, title: 'create an app' },
-    { key: 3, title: 'play on the switch' },
-
-  ])
-
-  const pressHandler = (key) => {
-     setTodos((prevTodos)=>{
-       return prevTodos.filter(todos => todos.key!= key)
-     })
-  }
-
   return (
-    <View style={styles.container}>
-      <Header/>
-      <View style={styles.content}>
-        {/* to do form */}
-        <View style={styles.list}>
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (
-              <ToDoItem item={item} pressHandler={pressHandler}/>
-            )}
+    <NavigationContainer>
+      <Drower.Navigator initialRouteName='login'>
+        <Drower.Screen name='login' component={LoginPage} />
+        <Drower.Screen name='spalsh' component={splashScreenPage}/>
+      </Drower.Navigator>
 
-          />
-
-        </View>
-      </View>
-
-    </View>
+    </NavigationContainer>
   )
 }
 
 export default App
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    padding: 40
-  },
-  list:{
-    marginTop:20,
-  }
-})
+const styles = StyleSheet.create({})
