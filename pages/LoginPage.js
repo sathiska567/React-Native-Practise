@@ -1,7 +1,7 @@
 import { Link } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/newLogo.png';
 
 
 const LoginPage = ({ navigation }) => {
@@ -42,7 +42,7 @@ const LoginPage = ({ navigation }) => {
       </TouchableOpacity>
 
 
-      <Text>If you haven't account ? <Link to="/SignUp" style={styles.signUp}>Sign Up</Link></Text>
+      <Text style={styles.link}>If you haven't account ? <Link to="/SignUp" style={styles.signUp}>Sign Up</Link></Text>
 
       {/* title="Back to SignUp" 
       onPress={()=>navigation.navigate('SignUp')} /> */}
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#Fe001a',
+    backgroundColor: '#1b1b1b',
     padding: 20,
     paddingTop: 200,
   },
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     fontWeight: 'bold',
+    color:"#fff"
   },
   form: {
     marginBottom:20,
@@ -115,5 +116,10 @@ const styles = StyleSheet.create({
     height:100,
     marginBottom:20,
     borderRadius:50,
+  },
+  link:{
+    color:'#fff',
+    marginTop:20,
+    fontSize:16,
   }
 })
