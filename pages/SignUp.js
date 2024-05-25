@@ -4,12 +4,13 @@ import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } fr
 import logo from '../assets/images/logo.png';
 
 
-const LoginPage = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [conformPassword, setConformPassword] = useState('');
 
   const handleSubmit = async () => {
-    console.log(email, password);
+    console.log(email, password,conformPassword);
   }
 
   return (
@@ -17,7 +18,7 @@ const LoginPage = ({ navigation }) => {
       <View>
          <Image source={logo} style={styles.image} />
       </View>
-      <Text style={styles.title}>LOGIN</Text>
+      <Text style={styles.title}>Sign Up</Text>
        <View style={styles.form}>
        <TextInput
         style={styles.input}
@@ -27,6 +28,7 @@ const LoginPage = ({ navigation }) => {
         keyboardType="email-address"
         autoCapitalize="none"
       />
+
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -36,9 +38,18 @@ const LoginPage = ({ navigation }) => {
         autoCapitalize="none"
       />
 
+      <TextInput
+        style={styles.input}
+        placeholder="Conform Password"
+        value={conformPassword}
+        onChangeText={(value) => setConformPassword(value)}
+        secureTextEntry
+        autoCapitalize="none"
+      />
+
        </View>
       <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-        <Text style={styles.buttonText}>Submit</Text>
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
 
 
@@ -50,7 +61,7 @@ const LoginPage = ({ navigation }) => {
   )
 }
 
-export default LoginPage
+export default SignUp
 
 const styles = StyleSheet.create({
   container: {
