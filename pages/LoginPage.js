@@ -2,6 +2,7 @@ import { Link } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import logo from '../assets/images/newLogo.png';
+import axios from 'axios';
 
 
 const LoginPage = ({ navigation }) => {
@@ -10,6 +11,10 @@ const LoginPage = ({ navigation }) => {
 
   const handleSubmit = async () => {
     console.log(email, password);
+    try {
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

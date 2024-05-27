@@ -2,6 +2,7 @@ import { Link } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import logo from '../assets/images/newLogo.png';
+import axios from 'axios';
 
 
 const SignUp = ({ navigation }) => {
@@ -11,6 +12,12 @@ const SignUp = ({ navigation }) => {
 
   const handleSubmit = async () => {
     console.log(email, password,conformPassword);
+    try {
+      const response = await axios.post("http://localhost:3000/register-user/details",{email:email,password:password});
+
+    } catch (error) {
+      
+    }
   }
 
   return (
