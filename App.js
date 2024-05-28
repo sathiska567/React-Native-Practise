@@ -5,6 +5,7 @@ import SplashScreenPage from './pages/splashScreenPage';
 import SignUp from './pages/SignUp';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import HomePage from './pages/HomePage';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ const App = () => {
 
         />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Home" component={HomePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

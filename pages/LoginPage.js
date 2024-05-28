@@ -12,6 +12,12 @@ const LoginPage = ({ navigation }) => {
   const handleSubmit = async () => {
     console.log(email, password);
     try {
+      const response = await axios.post("http://localhost:3000/register-user/login",{email:email,password:password});
+      console.log(response.data);
+      if(response.data.success){
+        localStorage.setItem('token',response.data.user.jwt);
+        navigation.navigate('Home');
+      }
     } catch (error) {
       console.log(error);
     }
