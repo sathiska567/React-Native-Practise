@@ -1,24 +1,46 @@
 import { Link } from '@react-navigation/native';
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, Image, Alert,Modal, Pressable } from 'react-native';
 import logo from '../assets/images/newLogo.png';
 import axios from 'axios';
+import { showMessage, FlashMessage } from "react-native-flash-message";
 
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [conformPassword, setConformPassword] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const handleSubmit = async () => {
-    console.log(email, password,conformPassword);
+    console.log(email, password, conformPassword);
+    
     try {
-      const response = await axios.post("http://localhost:3000/register-user/details",{email:email,password:password});
+      if(password !== conformPassword){
+        console.log("Password and conform password does not match");
+        return
+      }
 
+      const response = await axios.post("http://localhost:3000/register-user/details", {
+        email: email,
+        password: password
+      });
+      console.log(response);
+      // Alert.alert("Success", "Registration successful");
+
+      if (response.data.success) {
+        console.log(response.data.message);
+        navigation.navigate("Employee Login Page")
+      } else {
+        console.log(response.data.message);
+      }
+  
     } catch (error) {
-      
+      console.log(error);
     }
-  }
+  };
+
 
   return (
     <View style={styles.container}>
@@ -61,6 +83,8 @@ const SignUp = ({ navigation }) => {
 
 
       <Text style={styles.link}>If you haven't account ? <Link to="/SignUp" style={styles.signUp}>Sign Up</Link></Text>
+      {/* <Button title='Alert' onPress={()=>Alert.alert("hello")} /> */}
+    
     </View>
   )
 }
