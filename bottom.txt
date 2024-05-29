@@ -1,0 +1,32 @@
+   import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import Profile from './Profile';
+import AddCreate from './AddCreate';
+
+// const Tab = createBottomTabNavigator();
+
+// const screenOptions = {
+//   tabBarShowLabel: false,
+//   headerShown: false,
+//   tabBarStyle: {
+//     backgroundColor: "#fff",
+//     position: "absolute",
+//     bottom: 0,
+//     right: 0,
+//     left: 0,
+//     elevation: 0,
+//     height: 60,
+//   },
+// };
+   
+   
+   
+    <NavigationContainer>
+      <View style={styles.container}>
+        <Text style={styles.title}>Hello</Text>
+        <Tab.Navigator screenOptions={screenOptions}>
+          <Tab.Screen name='Profile' component={Profile} />
+          <Tab.Screen name='AddCreate' component={AddCreate} />
+        </Tab.Navigator>
+      </View>
+    </NavigationContainer>

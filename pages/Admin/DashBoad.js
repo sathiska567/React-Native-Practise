@@ -47,7 +47,7 @@ const Dashboard = ({navigation}) => {
               }
             ]
           }}
-          width={Dimensions.get("window").width - 32} // Adjust for padding
+          width={Dimensions.get("window").width} // Adjust for padding
           height={250}
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
@@ -119,6 +119,9 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
     marginVertical: 4,
     textAlign: 'left',
+    borderRadius: 10,
+    margin:10,
+    marginBottom:12
   },
   second_section: {
     marginTop: 16,
