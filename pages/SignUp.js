@@ -32,6 +32,7 @@ const SignUp = ({ navigation }) => {
       if (response.data.success) {
         console.log(response.data.message);
         navigation.navigate("Employee Login Page")
+
       } else {
         console.log(response.data.message);
       }

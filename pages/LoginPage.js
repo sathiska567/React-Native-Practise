@@ -8,6 +8,7 @@ import axios from 'axios';
 const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isAdmin , setIsAdmin] = useState(false);
 
   const handleSubmit = async () => {
     console.log(email, password);
@@ -16,7 +17,12 @@ const LoginPage = ({ navigation }) => {
       console.log(response.data);
       if(response.data.success){
         localStorage.setItem('token',response.data.user.jwt);
-        navigation.navigate('Home');
+        if(response.data.user.isAdmin){
+          navigation.navigate('dashboad');
+        }
+        else{
+          navigation.navigate('Home');
+        }
       }
     } catch (error) {
       console.log(error);

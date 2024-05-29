@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from './pages/HomePage';
+import DashBoad from './pages/Admin/DashBoad';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +28,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="dashboad">
         <Stack.Screen
           name="Employee Login Page"
           component={LoginPage}
@@ -51,6 +52,7 @@ const App = () => {
         />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="dashboad" component={DashBoad} />
       </Stack.Navigator>
     </NavigationContainer>
   );
