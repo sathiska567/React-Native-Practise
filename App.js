@@ -7,6 +7,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from './pages/HomePage';
 import DashBoad from './pages/Admin/DashBoad';
+import FlatScreen from './screen/FlatList';
+import UserDetails from './pages/Admin/UserDetails';
 
 const Stack = createStackNavigator();
 
@@ -53,6 +55,7 @@ const App = () => {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="dashboad" component={DashBoad} />
+        <Stack.Screen name="userDetails" component={UserDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
