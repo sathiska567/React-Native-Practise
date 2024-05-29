@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View , ScrollView, FlatList} from 'react-native'
 import React, { useState } from 'react'
 
-const App = () => {
+const FlatScreen = () => {
   const [people , setPeople] = useState([
      {name:"sahan" , id:'1'},
      {name:"lugi" , id:'2'},
@@ -18,28 +18,28 @@ const App = () => {
     <View style={styles.container}>
 
       {/* only list loading when scrolling */}
-         <FlatList 
-          //  numColumns={2}
+         {/* <FlatList 
+           numColumns={2}
            keyExtractor={(item)=>item.id}
            data={people}
            renderItem={({item})=>(
              <Text style={styles.item}>{item.name}</Text>
            )}
          
-         />
+         /> */}
 
-      {/* <ScrollView>
+      <ScrollView>
       {people.map((item)=>(
          <View key={item.key}>
           <Text style={styles.item}>{item.name}</Text>
          </View>
       ))}
-      </ScrollView> */}
+      </ScrollView>
     </View>
   )
 }
 
-export default App
+export default FlatScreen
 
 const styles = StyleSheet.create({
   container: {
