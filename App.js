@@ -1,4 +1,4 @@
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import SplashScreenPage from './pages/splashScreenPage';
@@ -43,12 +43,18 @@ const MainTabNavigator = () => (
       
     })}
   >
-    <Tab.Screen name="Home Page" component={HomePage} options={{
-       headerTitle: () => (
-        <Image
-          source={image}
-          style={{ width: '100vw', height: '10vh' }}
-        />
+    <Tab.Screen name="Home page" component={HomePage} options={{
+      //  headerTitle: () => (
+      //   // <Image
+      //   //   source={image}
+      //   //   style={{ width: '110vw', height: '25vh',marginLeft:"-25px",borderBottomRightRadius:"250px"}}
+      //   // />
+      // ),
+      headerTitle:()=>(
+        <>
+        <Text style={styles.HomeHeaderSubTitle}>Welcome Travel Buddy </Text>
+        <Text style={styles.HomeHeaderTitle}>Find Your Dream Destination </Text>
+        </>
       ),
       headerStyle: styles.homePageHeader,
       headerTitleStyle:styles.HomeHeaderTitle
@@ -80,7 +86,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home Page">
+      <Stack.Navigator initialRouteName="Employee Login Page">
         <Stack.Screen
           name="Employee Login Page"
           component={LoginPage}
@@ -115,9 +121,24 @@ export default App;
 const styles = StyleSheet.create({
   homePageHeader:{
     backgroundColor:"#000f89",
-    height:"10vh",
+    height:"25vh",
+    borderBottomWidth:0,
+    borderBottomColor:"#000f89",
+    borderBottomRightRadius:"120px",
     },
+
     HomeHeaderTitle:{
       color:"#fff",
-    }
+      fontSize:25,
+      fontWeight:"bold",
+      fontFamily:"sans-serif",
+      padding:"10px",
+    },
+    HomeHeaderSubTitle:{
+      color:"#fff",
+      fontSize:18,
+      // fontWeight:"bold",
+      fontFamily:"sans-serif",
+      padding:"10px",
+    },
 });
