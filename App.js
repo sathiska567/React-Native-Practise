@@ -86,7 +86,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Employee Login Page">
+      <Stack.Navigator initialRouteName="Home Page">
         <Stack.Screen
           name="Employee Login Page"
           component={LoginPage}

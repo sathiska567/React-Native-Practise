@@ -21,9 +21,10 @@ const Slider = () => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.imageContainer}>
+                        <Text>Rating</Text>
+
             <Text style={styles.title}>{item.title}</Text>
             <Image source={item.image} style={styles.image} />
-            
           </View>
         )}
       />
