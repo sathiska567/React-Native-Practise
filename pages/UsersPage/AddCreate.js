@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { TextInput, Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { TextInput, Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 // import { launchImageLibrary } from '@react-native-image-picker/image-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import values from './../../node_modules/lodash-es/values';
 import axios from 'axios';
+// import { CloudinaryImagePicker } from 'cloudinary-react-native';
+
+// const cloudinary = new CloudinaryImagePicker({ cloud_name: 'djtcqggdu' });
 
 
 const AddCreate = () => {
@@ -23,9 +26,13 @@ const AddCreate = () => {
     });
 
     if (!result.canceled) {
-      // console.log(result);
+      console.log(result);
       // const source = { uri: result.assets[0] };
       // setImage(result.assets[0]);
+      // const 
+      // const data = await cloudinary.uploader.upload(result.assets[0].uri);
+      // console.log('Uploaded image URL:', data);
+      
       setImageUri(result.assets[0].uri)
     } else {
       alert('You did not select any image.');
@@ -38,19 +45,19 @@ const AddCreate = () => {
     // }
     // console.log(imageUri);
 
-    const formData = new FormData();
-    formData.append('image', {
-      uri: imageUri,
-    })
-    formData.append('userName', userName);
-    formData.append('email', email);
-    formData.append('number', number);
-    formData.append('location', location);
-    formData.append('description', description);
+    // const formData = new FormData();
+    // formData.append('image', {
+    //   uri: imageUri,
+    // })
+    // formData.append('userName', userName);
+    // formData.append('email', email);
+    // formData.append('number', number);
+    // formData.append('location', location);
+    // formData.append('description', description);
 
     try {
-      console.log(formData);
-      const response = await axios.post("http://localhost:3000/add-create-details/post-details",formData);
+      // console.log(formData);
+      const response = await axios.post("http://localhost:3000/add-create-details/post-details",imageUri);
       // console.log(response);
     } catch (error) {
       console.log(error);
@@ -118,9 +125,12 @@ const AddCreate = () => {
           </TouchableOpacity>
         </View>
 
+        <Image source={{ uri: imageUri }} style={{ width:20, height: 20}}  />
+
         <TouchableOpacity onPress={handleSubmit}>
           <Text style={styles.submitButton}>Submit</Text>
         </TouchableOpacity>
+
       </View>
     </SafeAreaView>
   )
