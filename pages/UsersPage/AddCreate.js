@@ -5,9 +5,6 @@ import * as ImagePicker from 'expo-image-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import values from './../../node_modules/lodash-es/values';
 import axios from 'axios';
-// import { CloudinaryImagePicker } from 'cloudinary-react-native';
-
-// const cloudinary = new CloudinaryImagePicker({ cloud_name: 'djtcqggdu' });
 
 
 const AddCreate = () => {
@@ -45,23 +42,32 @@ const AddCreate = () => {
     // }
     // console.log(imageUri);
 
-    // const formData = new FormData();
-    // formData.append('image', {
-    //   uri: imageUri,
-    // })
+    const formData = new FormData();
+    formData.append('image', {
+      uri: imageUri,
+    })
+    formData.append('upload_preset', 'travelApp');
+    formData.append('cloud_name', 'dov8hd3v6');
+
+   fetch("https://api.cloudinary.com/v1_1/dov8hd3v6/image/upload",{
+    method: 'POST',
+    body: formData
+   }).then(res=>res.json())
+   then(data=>console.log(data))
+
     // formData.append('userName', userName);
     // formData.append('email', email);
     // formData.append('number', number);
     // formData.append('location', location);
     // formData.append('description', description);
 
-    try {
-      // console.log(formData);
-      const response = await axios.post("http://localhost:3000/add-create-details/post-details",imageUri);
-      // console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   // console.log(formData);
+    //   const response = await axios.post("http://localhost:3000/add-create-details/post-details",imageUri);
+    //   // console.log(response);
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
   }
 
@@ -101,7 +107,7 @@ const AddCreate = () => {
 
         <View>
           <Text style={styles.label}>Enter Location :</Text>
-          <TextInput
+          <TextInput            
             onChangeText={(value) => setLocation(value)}
             style={styles.input}
             placeholder="Enter Your Location"
