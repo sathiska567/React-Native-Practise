@@ -37,23 +37,15 @@ const AddCreate = () => {
   };
 
   const handleSubmit = async() => {
-    // if (!image) {
-    //   return
-    // }
+
     // console.log(imageUri);
 
     const formData = new FormData();
     formData.append('image', {
       uri: imageUri,
     })
-    formData.append('upload_preset', 'travelApp');
-    formData.append('cloud_name', 'dov8hd3v6');
 
-   fetch("https://api.cloudinary.com/v1_1/dov8hd3v6/image/upload",{
-    method: 'POST',
-    body: formData
-   }).then(res=>res.json())
-   then(data=>console.log(data))
+    console.log(formData);
 
     // formData.append('userName', userName);
     // formData.append('email', email);
@@ -61,13 +53,13 @@ const AddCreate = () => {
     // formData.append('location', location);
     // formData.append('description', description);
 
-    // try {
-    //   // console.log(formData);
-    //   const response = await axios.post("http://localhost:3000/add-create-details/post-details",imageUri);
-    //   // console.log(response);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      // console.log(formData);
+      const response = await axios.post("http://localhost:3000/add-create-details/post-details",formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 
