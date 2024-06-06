@@ -1,4 +1,4 @@
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import SplashScreenPage from './pages/splashScreenPage';
@@ -14,6 +14,7 @@ import AddCreate from './pages/UsersPage/AddCreate';
 import BrowsAdd from './pages/UsersPage/BrowsAdd';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import image from "./assets/images/travel.png"
+import TrackLocation from './pages/UsersPage/TrackLocation';
 
 
 const Stack = createStackNavigator();
@@ -33,6 +34,8 @@ const MainTabNavigator = () => (
           iconName = focused ? 'add-circle' : 'add-circle-outline';
         } else if (route.name === 'Brows_Add') {
           iconName = focused ? 'list' : 'list-outline';
+        }else if (route.name === 'trackLocation') {
+          iconName = focused ? 'location' : 'location-outline';
         }
 
         // You can return any component that you like here!
@@ -43,20 +46,45 @@ const MainTabNavigator = () => (
       
     })}
   >
-    <Tab.Screen name="Home Page" component={HomePage} options={{
-       headerTitle: () => (
-        <Image
-          source={image}
-          style={{ width: '100vw', height: '10vh' }}
-        />
+    <Tab.Screen name="Home page" component={HomePage} options={{
+      //  headerTitle: () => (
+      //   // <Image
+      //   //   source={image}
+      //   //   style={{ width: '110vw', height: '25vh',marginLeft:"-25px",borderBottomRightRadius:"250px"}}
+      //   // />
+      // ),
+      headerTitle:()=>(
+        <>
+        <Text style={styles.HomeHeaderSubTitle}>Welcome Travel Buddy </Text>
+        <Text style={styles.HomeHeaderTitle}>Find Your Dream Destination </Text>
+        </>
       ),
       headerStyle: styles.homePageHeader,
       headerTitleStyle:styles.HomeHeaderTitle
 
       }}/>
 
-    <Tab.Screen name="Add_Create" component={AddCreate} />
+    <Tab.Screen name="Add_Create" component={AddCreate} 
+    options={{
+      //  headerTitle: () => (
+      //   // <Image
+      //   //   source={image}
+      //   //   style={{ width: '110vw', height: '25vh',marginLeft:"-25px",borderBottomRightRadius:"250px"}}
+      //   // />
+      // ),
+      headerTitle:()=>(
+        <>
+        <Text style={styles.HomeHeaderSubTitle}>Welcome Add Create Page </Text>
+        <Text style={styles.HomeHeaderTitle}>Create Your Add !</Text>
+        </>
+      ),
+      headerStyle: styles.homePageHeader,
+      headerTitleStyle:styles.HomeHeaderTitle
+
+      }}
+    />
     <Tab.Screen name="Brows_Add" component={BrowsAdd} />
+    <Tab.Screen name="trackLocation" component={TrackLocation} />
     <Tab.Screen name="Profile" component={Profile} />
 
   </Tab.Navigator>
@@ -80,7 +108,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home Page">
+      <Stack.Navigator initialRouteName="Add_Create">
         <Stack.Screen
           name="Employee Login Page"
           component={LoginPage}
@@ -105,6 +133,23 @@ const App = () => {
         <Stack.Screen name="Home Page" component={MainTabNavigator} options={{ headerShown: false}} />
         <Stack.Screen name="userDetails" component={UserDetails} />
         <Stack.Screen name="dashboad" component={Dashboard} />
+        <Stack.Screen name="Add_Create" component={AddCreate} options={{
+      //  headerTitle: () => (
+      //   // <Image
+      //   //   source={image}
+      //   //   style={{ width: '110vw', height: '25vh',marginLeft:"-25px",borderBottomRightRadius:"250px"}}
+      //   // />
+      // ),
+      headerTitle:()=>(
+        <>
+        <Text style={styles.HomeHeaderSubTitle}>Welcome Add Create Page </Text>
+        <Text style={styles.HomeHeaderTitle}>Create Your Add !</Text>
+        </>
+      ),
+      headerStyle: styles.homePageHeader,
+      headerTitleStyle:styles.HomeHeaderTitle
+
+      }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -115,9 +160,24 @@ export default App;
 const styles = StyleSheet.create({
   homePageHeader:{
     backgroundColor:"#000f89",
-    height:"10vh",
+    height:"25vh",
+    borderBottomWidth:0,
+    borderBottomColor:"#000f89",
+    borderBottomRightRadius:"120px",
     },
+
     HomeHeaderTitle:{
       color:"#fff",
-    }
+      fontSize:25,
+      fontWeight:"bold",
+      fontFamily:"sans-serif",
+      padding:"10px",
+    },
+    HomeHeaderSubTitle:{
+      color:"#fff",
+      fontSize:18,
+      // fontWeight:"bold",
+      fontFamily:"sans-serif",
+      padding:"10px",
+    },
 });
