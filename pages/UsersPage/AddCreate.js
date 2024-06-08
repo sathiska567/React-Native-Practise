@@ -5,47 +5,48 @@ import * as ImagePicker from 'expo-image-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import values from './../../node_modules/lodash-es/values';
 import axios from 'axios';
+// import { useNavigation } from 'expo-router';
 
 
-const AddCreate = () => {
+const AddCreate = ({ navigation }) => {
   const [imageUri, setImageUri] = useState('');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-
+  // const navigation = useNavigation()
   
-  const pickImageAsync = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      quality: 1,
-    });
+  // const pickImageAsync = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     allowsEditing: true,
+  //     quality: 1,
+  //   });
 
-    if (!result.canceled) {
-      console.log(result);
-      // const source = { uri: result.assets[0] };
-      // setImage(result.assets[0]);
-      // const 
-      // const data = await cloudinary.uploader.upload(result.assets[0].uri);
-      // console.log('Uploaded image URL:', data);
+  //   if (!result.canceled) {
+  //     console.log(result);
+  //     // const source = { uri: result.assets[0] };
+  //     // setImage(result.assets[0]);
+  //     // const 
+  //     // const data = await cloudinary.uploader.upload(result.assets[0].uri);
+  //     // console.log('Uploaded image URL:', data);
       
-      setImageUri(result.assets[0].uri)
-    } else {
-      alert('You did not select any image.');
-    }
-  };
+  //     setImageUri(result.assets[0].uri)
+  //   } else {
+  //     alert('You did not select any image.');
+  //   }
+  // };
 
   const handleSubmit = async() => {
 
     // console.log(imageUri);
 
-    const formData = new FormData();
-    formData.append('image', {
-      uri: imageUri,
-    })
+    // const formData = new FormData();
+    // formData.append('image', {
+    //   uri: imageUri,
+    // })
 
-    console.log(formData);
+    // console.log(formData);
 
     // formData.append('userName', userName);
     // formData.append('email', email);
@@ -55,8 +56,12 @@ const AddCreate = () => {
 
     try {
       // console.log(formData);
-      const response = await axios.post("http://localhost:3000/add-create-details/post-details",formData);
+      // const response = await axios.post("http://localhost:3000/add-create-details/post-details",formData);
+     const response = await axios.post("http://localhost:3000/add-create-details/post-details",{userName:userName,email:email,number:number,location:location,description:description});
       console.log(response);
+      if(response.data.success){
+        navigation.navigate('Home_Page')
+      }
     } catch (error) {
       console.log(error);
     }
@@ -117,11 +122,11 @@ const AddCreate = () => {
           />
         </View>
 
-        <View style={styles.imagePickerSection}>
+        {/* <View style={styles.imagePickerSection}>
           <TouchableOpacity style={styles.customButton} onPress={pickImageAsync}>
             <Text style={styles.buttonText}>Select Image</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <Image source={{ uri: imageUri }} style={{ width:20, height: 20}}  />
 

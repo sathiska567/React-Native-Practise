@@ -29,7 +29,7 @@
     "dotenv": "^16.4.5",
     "expo": "~51.0.8",
     "expo-image-picker": "~15.0.5",
-    "expo-router": "^3.5.14",
+    "expo-router": "^3.5.15",
     "expo-status-bar": "~1.12.1",
     "express": "^4.19.2",
     "formik": "^2.4.6",

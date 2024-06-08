@@ -21,7 +21,7 @@ const LoginPage = ({ navigation }) => {
           navigation.navigate('dashboad');
         }
         else{
-          navigation.navigate('Home Page');
+          navigation.navigate('Home_Page');
         }
       }
     } catch (error) {
