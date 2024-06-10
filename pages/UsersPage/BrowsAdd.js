@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { View, FlatList, Image, StyleSheet, Dimensions, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, FlatList, Image, StyleSheet, Dimensions, Text, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const { width } = Dimensions.get('window');
 
-// Define image data with titles
 const imageData = [
   { id: 1, image: require('../../assets/images/daladamaligawa.png'), title: 'Dalada Maligawa', rating: 4 },
   { id: 2, image: require('../../assets/images/galleFort.png'), title: 'Galle Fort', rating: 5 },
@@ -16,8 +15,8 @@ const imageData = [
 const BrowsAdd = () => {
   const [postDetails, setPostDetails] = useState([]);
   const [ratings, setRatings] = useState(imageData);
+  const [searchValue, setSearchValue] = useState('');
 
-  // Get all post details
   const getAllDetails = async () => {
     try {
       const response = await axios.get('http://localhost:3000/add-create-details/get-created-adds');
@@ -44,50 +43,76 @@ const BrowsAdd = () => {
     setRatings(newRatings);
   };
 
+  const handleSearch = async () => {
+    try {
+      const filterResponse = await axios.post("http://localhost:3000/brows-class/filter-data", { data: searchValue });
+      console.log(filterResponse);
+      setPostDetails(filterResponse.data.data);
+    } catch (error) {
+      console.log(error);
+      showAlert("Error", "An error occurred while fetching data. Please try again later.");
+    }
+  };
+
   useEffect(() => {
     getAllDetails();
   }, []);
 
+  const showAlert = (title, message) => {
+    Alert.alert(
+      title,
+      message,
+      [
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed")
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.filterSection}>Add your favourite places</Text>
-      <ScrollView>
-        <FlatList
-          data={ratings}
-          horizontal={false}
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item, index }) => (
-            <View style={styles.card}>
-              <View style={styles.imageContainer}>
-                <Image source={item.image} style={styles.image} />
-                {postDetails[index] && (
-                  <Text key={postDetails[index]._id} style={styles.title}>
-                    {postDetails[index].location}
-                  </Text>
-                )}
-
-                {/* Rating View */}
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginBottom: 8 }}>
-                  {[...Array(5)].map((_, starIndex) => (
-                    <TouchableOpacity key={starIndex} onPress={() => handleStarPress(item.id, starIndex)}>
-                      <Ionicons
-                        name={starIndex < item.rating ? 'star' : 'star-outline'}
-                        size={20}
-                        color="gold"
-                      />
-                    </TouchableOpacity>
-                  ))}
-
-                  <TouchableOpacity>
-                    <Text style={styles.paragraph}>see review</Text>
+      <View style={styles.filterSection}>
+        <TextInput
+          style={styles.input}
+          placeholder="Search..."
+          onChangeText={text => setSearchValue(text)}
+          value={searchValue}
+        />
+        <Button title="Search" onPress={handleSearch} />
+      </View>
+      <FlatList
+        data={postDetails}
+        keyExtractor={(item) => item._id.toString()}
+        renderItem={({ item, index }) => (
+          <View style={styles.card}>
+            <View style={styles.imageContainer}>
+              <Image source={ratings[index % ratings.length].image} style={styles.image} />
+              {postDetails[index] && (
+                <Text key={postDetails[index]._id} style={styles.title}>
+                  {postDetails[index].location}
+                </Text>
+              )}
+              <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginBottom: 8 }}>
+                {[...Array(5)].map((_, starIndex) => (
+                  <TouchableOpacity key={starIndex} onPress={() => handleStarPress(ratings[index % ratings.length].id, starIndex)}>
+                    <Ionicons
+                      name={starIndex < ratings[index % ratings.length].rating ? 'star' : 'star-outline'}
+                      size={20}
+                      color="gold"
+                    />
                   </TouchableOpacity>
-                </View>
+                ))}
+                <TouchableOpacity>
+                  <Text style={styles.paragraph}>see review</Text>
+                </TouchableOpacity>
               </View>
             </View>
-          )}
-        />
-      </ScrollView>
+          </View>
+        )}
+      />
     </View>
   );
 };
@@ -98,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding:12
+    padding: 12
   },
   imageContainer: {
     width: width * 0.8, // Adjust the width as needed
@@ -138,10 +163,15 @@ const styles = StyleSheet.create({
     marginLeft: 150,
   },
   filterSection: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
-    paddingBottom: 15,
     textAlign: 'center',
     marginTop: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderBottomWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginBottom: 10,
   },
 });
