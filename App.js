@@ -103,7 +103,7 @@ const MainTabNavigator = () => (
       }}
     />
     <Tab.Screen name="trackLocation" component={TrackLocation} />
-    <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Screen name="Profile" component={Profile} options={{headerShown: false}} />
 
   </Tab.Navigator>
 );
